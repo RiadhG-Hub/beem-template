@@ -106,6 +106,7 @@ dependencies:
   file_picker: ^10.1.9
   #whisper_ggml: ^1.0.0
   encrypt_shared_preferences: ^0.9.9
+  mocktail: ^1.0.4
 
 
 dev_dependencies:
@@ -132,7 +133,6 @@ dev_dependencies:
   dartz_test: ^0.1.1
   network_image_mock: ^2.1.1
   nock: ^1.2.2
-  mocktail: ^1.0.4
 
   # Utilities
   change_app_package_name: ^1.4.0

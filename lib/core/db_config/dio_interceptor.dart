@@ -41,7 +41,6 @@ class DioClient {
       RequestOptions options, RequestInterceptorHandler handler) async {
     final token = await tokenManager.getToken();
     final String uri = options.uri.toString();
-    print(uri);
     if (!uri.contains("CheckAppVersion")) {
       options.headers['Authorization'] = 'Basic $token';
     }
@@ -62,8 +61,6 @@ class DioClient {
     // } else {
     //   print("🔹 Authentication request, no token added");
     // }
-    print("🔹 Headers: ${options.headers}");
-    print("🔹 Body: ${options.data}\n");
 
     handler.next(options);
   }
