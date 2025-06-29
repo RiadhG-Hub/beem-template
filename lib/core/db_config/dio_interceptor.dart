@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:injectable/injectable.dart';
-import 'package:momra/core/util/helper_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'db_config.dart';
@@ -24,10 +23,10 @@ void configureDioForTesting(Dio dio) {
 class DioClient {
   final Dio _dio;
   final TokenManager tokenManager;
-  final String baseUrl;
 
-  DioClient(this.tokenManager, this.baseUrl)
-      : _dio = Dio(BaseOptions(baseUrl: baseUrl)) {
+  DioClient(
+    this.tokenManager,
+  ) : _dio = Dio(BaseOptions(baseUrl: Constants.baseUrl)) {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: _handleRequest,
@@ -40,18 +39,11 @@ class DioClient {
 
   Future<void> _handleRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    final basic = await tokenManager.getBasic();
     final token = await tokenManager.getToken();
     final String uri = options.uri.toString();
     print(uri);
     if (!uri.contains("CheckAppVersion")) {
-      if (uri.contains("SendMedia") || uri.contains("GetMedia")) {
-        options.headers['Token'] =
-            '${generateRandom3Char()}$token${generateRandom3Char()}';
-      } else {
-        options.headers['Authorization'] =
-            'Basic ${generateRandom3Char()}$basic}';
-      }
+      options.headers['Authorization'] = 'Basic $token';
     }
     // final isAuthRequest = options.uri.toString() == Constants.loginUrl ||
     //     options.uri.toString() == Constants.authenticateUrl;

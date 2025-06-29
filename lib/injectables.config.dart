@@ -19,9 +19,6 @@ import 'core/network/network_info.dart' as _i75;
 import 'features/auth/data/data_source/auth_cached_data_source.dart' as _i447;
 import 'features/auth/data/data_source/auth_remote_data_source.dart' as _i1016;
 import 'features/auth/data/repositories/auth_repository_impl.dart' as _i111;
-import 'features/auth/presentation/bloc/authentication_bloc.dart' as _i37;
-import 'features/auth/presentation/cubit/user_credentials/user_credentials_cubit.dart'
-    as _i483;
 import 'register_module.dart' as _i291;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -48,10 +45,8 @@ extension GetItInjectableX on _i174.GetIt {
               await getAsync<_i460.SharedPreferences>(),
               gh<_i930.EncryptedSharedPreferences>(),
             ));
-    gh.factoryAsync<_i580.DioClient>(() async => _i580.DioClient(
-          await getAsync<_i580.TokenManager>(),
-          gh<String>(),
-        ));
+    gh.factoryAsync<_i580.DioClient>(
+        () async => _i580.DioClient(await getAsync<_i580.TokenManager>()));
     gh.factoryAsync<_i1016.AuthDataSource>(() async => _i1016.AuthDataSource(
           await getAsync<_i580.DioClient>(),
           await getAsync<_i580.TokenManager>(),
@@ -60,13 +55,6 @@ extension GetItInjectableX on _i174.GetIt {
         () async => _i111.AuthRepositoryImpl(
               remoteDataSource: await getAsync<_i1016.AuthDataSource>(),
               cachedDataSource: await getAsync<_i447.AuthCachedDataSource>(),
-            ));
-    gh.singletonAsync<_i483.UserCredentialsCubit>(() async =>
-        _i483.UserCredentialsCubit(await getAsync<_i111.AuthRepositoryImpl>()));
-    gh.singletonAsync<_i37.AuthenticationBloc>(
-        () async => _i37.AuthenticationBloc(
-              await getAsync<_i111.AuthRepositoryImpl>(),
-              await getAsync<_i580.TokenManager>(),
             ));
     return this;
   }

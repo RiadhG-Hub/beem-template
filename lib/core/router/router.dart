@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:momra/features/auth/presentation/screen/login_page.dart';
 import 'package:momra/splash_screen_view.dart' show SplashScreen;
 
 class AppRoutes {
@@ -16,14 +15,6 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) => _buildPageWithTransition(
         state: state,
         child: const SplashScreen(),
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.loginPage,
-      name: AppRoutes.loginPage,
-      pageBuilder: (context, state) => _buildPageWithTransition(
-        state: state,
-        child: const LoginPage(),
       ),
     ),
   ],

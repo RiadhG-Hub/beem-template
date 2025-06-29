@@ -1,24 +1,18 @@
-import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:momra/core/theme/theme.dart';
-import 'package:momra/features/auth/presentation/bloc/authentication_bloc.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'core/router/router.dart';
-import 'core/theme/colors.dart';
-import 'features/auth/presentation/cubit/user_credentials/user_credentials_cubit.dart';
 import 'injectables.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  final key = dotenv.env['ENCYPT_KEY'] ?? "";
-  await EncryptedSharedPreferences.initialize(key);
+
   configureDependencies();
 
   await SystemChrome.setPreferredOrientations([
@@ -48,10 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => getIt<AuthenticationBloc>()),
-        BlocProvider(create: (_) => getIt<UserCredentialsCubit>()),
-      ],
+      providers: [],
       child: Builder(
         builder: (context) {
           return ScreenUtilInit(
@@ -68,13 +59,6 @@ class MyApp extends StatelessWidget {
                   supportedLocales: AppLocalizations.supportedLocales,
                   localizationsDelegates:
                       AppLocalizations.localizationsDelegates,
-                  theme: ThemeData(
-                    primaryColor: AppColors.greenTwo,
-                    colorScheme: AppColors.colorScheme,
-                    fontFamily: 'Segoe_Ui',
-                    appBarTheme: appBarTheme,
-                    inputDecorationTheme: inputDecorationTheme,
-                  ),
                   debugShowCheckedModeBanner: true,
                   routerConfig: router,
                 ),
