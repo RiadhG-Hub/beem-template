@@ -1,0 +1,185 @@
+name: momra
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.1.4
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+
+  # App flavoring
+  flutter_flavor: ^3.1.1
+
+  # Utilities
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+  meta: ^1.8.0
+  uuid: ^3.0.7
+  intl: ^0.19.0
+  collection: ^1.17.1
+
+  # Code generation annotations
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.8.0
+
+  # State management
+  flutter_hooks: ^0.21.2
+  hooks_riverpod: ^2.3.4
+  flutter_bloc: ^9.1.0
+  bloc: ^9.0.0
+  top_snackbar_flutter: ^3.1.0
+  # Persistence & storage
+  path_provider: ^2.0.15
+  path_provider_platform_interface: ^2.0.0
+  path: ^1.8.2
+  shared_preferences: ^2.5.3
+  webview_flutter: ^4.11.0
+
+  # Dependency injection
+  injectable: ^2.1.1
+  get_it: ^8.0.3
+
+  # Environment variables
+  envied: ^1.1.1
+
+  # Networking & error tracking
+  dio: ^5.8.0+1
+  http: ^1.3.0
+  sentry_flutter: ^8.14.2
+  internet_connection_checker: ^3.0.1
+
+  # UI & UX
+  flutter_adaptive_scaffold: ^0.3.2
+  shimmer: ^3.0.0
+  overlay_support: ^2.1.0
+  flutter_typeahead: ^5.2.0
+  add_to_google_wallet: ^0.0.5
+  url_launcher: ^6.3.1
+  qr_flutter: ^4.1.0
+  double_back_to_close_app: ^2.1.0
+  cached_network_image: ^3.2.3
+  country_picker: ^2.0.20
+  linked_scroll_controller: ^0.2.0
+  flutter_svg: ^2.1.0
+  readmore: ^3.0.0
+  gradient_borders: ^1.0.0
+  auto_size_text: ^3.0.0
+  flutter_screenutil: ^5.9.3
+  google_fonts: ^6.2.1
+  seatsio: ^0.4.0
+  vector_tile_renderer: ^6.0.0
+  flutter_map_marker_popup: ^7.0.0
+
+  # Media
+  image_picker: ^1.1.2
+  record: ^5.0.0
+  permission_handler: ^12.0.0+1
+  speech_to_text_ultra_tg: ^0.0.6
+  speech_to_text: any
+  flutter_sound: ^9.28.0
+  just_audio: ^0.9.40
+
+  # AI & ML
+  google_generative_ai: ^0.4.7
+
+  # Misc
+  share_plus: ^11.0.0
+  pass_flutter: ^2.0.1
+  go_router: ^15.1.1
+  flutter_dotenv: ^5.2.1
+  names_launcher: ^0.0.2
+  syncfusion_flutter_pdf: ^29.1.39
+  dart_mappable: ^4.5.0
+  encrypt: ^5.0.3
+  pointycastle: ^3.9.1
+  charset_converter: ^2.3.0
+  package_info_plus: ^8.3.0
+  hive_flutter: ^1.1.0
+  file_picker: ^10.1.9
+  #whisper_ggml: ^1.0.0
+  encrypt_shared_preferences: ^0.9.9
+
+
+dev_dependencies:
+  sentry_dart_plugin: ^2.4.1
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  # Code style and tooling
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.3
+  flutter_flavorizr: any
+  flutter_gen_runner: ^5.3.2
+  # Code generation
+  build_runner: ^2.3.3
+  freezed: ^3.0.6
+  injectable_generator: any
+  envied_generator: ^1.1.1
+
+  # Testing
+  mockito: ^5.4.0
+  bloc_test: ^10.0.0
+  dartz_test: ^0.1.1
+  network_image_mock: ^2.1.1
+  nock: ^1.2.2
+  mocktail: ^1.0.4
+
+  # Utilities
+  change_app_package_name: ^1.4.0
+  pub_version_plus: ^3.1.2
+  dart_mappable_builder: ^4.5.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  remove_alpha_ios: true
+
+names_launcher:
+  name:
+    default: "وزارة البلديات والإسكان"
+    ar: "وزارة البلديات والإسكان"
+    en: "Ministry of Municipalities and Housing"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+
+flutter_gen:
+  integrations:
+    flutter_svg: true
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/svg/
+    - assets/whisper/
+    - .env
+
+  fonts:
+    - family: Segoe_Ui
+      fonts:
+        - asset: assets/font/segoe-ui.ttf
+        - asset: assets/font/segoe-ui-bold.ttf
+          weight: 700
+        - asset: assets/font/segoe-ui-semibold.ttf
+          weight: 600
+sentry:
+  upload_debug_symbols: true
+  upload_source_maps: true
+  project: momra
+  org: abcher

@@ -1,0 +1,89 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Distribute Enterprise build"
+  lane :beta do
+    # Step 1: Flutter archive
+    sh("flutter build ipa --release")
+
+    # Step 2: Export IPA using gym
+    gym(
+      workspace: "ios/Runner.xcworkspace",
+      scheme: "Runner",
+      archive_path: "build/ios/archive/Runner.xcarchive",
+      export_method: "enterprise",
+      output_directory: "build/ios/ipa",
+      output_name: "Runner.ipa",
+      export_options: {
+        method: "enterprise",
+        signingStyle: "automatic",
+        teamID: "D3R75CCU45",
+        provisioningProfiles: {
+          "com.ministerOfficeCTS.momra" => "CTSMinisterOffice"
+        }
+      }
+    )
+
+    ipa_path = "/Users/riadhgharbi/StudioProjects/momra/build/ios/ipa/Runner.ipa"
+    unless File.exist?(ipa_path)
+      UI.user_error!("IPA not found at #{ipa_path}.")
+    end
+
+    # Firebase Distribution
+    sh("/usr/local/bin/firebase appdistribution:distribute #{ipa_path} --app 1:224943458926:ios:b011d17368cec6bcf2747f --testers gharbiriadh16@gmail.com,gharbiriadh17@gmail.com,Ichamly-contractor@momah.gov.sa --release-notes 'New enterprise build'")
+
+    # Construct Firebase App Distribution invitation link
+    firebase_app_id = "1:224943458926:ios:b011d17368cec6bcf2747f"
+    invitation_link = "https://appdistribution.firebase.google.com/pub/i/#{firebase_app_id}"
+    message = "✅ New *Enterprise IPA* uploaded to Firebase App Distribution. Access it here: #{invitation_link}. Ensure you accept the invitation email and sign in with the invited email (gharbiriadh16@gmail.com or gharbiriadh17@gmail.com)."
+
+    # Teams notification with invitation link
+    notify_teams(message)
+  end
+end
+
+platform :android do
+  desc "Upload a staging build to Firebase"
+  lane :beta do
+    sh("flutter build apk --release")
+
+    apk_path = "/Users/riadhgharbi/StudioProjects/momra/build/app/outputs/flutter-apk/app-release.apk"
+    unless File.exist?(apk_path)
+      UI.user_error!("APK not found at #{apk_path}. Flutter build might have failed.")
+    end
+
+    # Firebase distribution
+    sh("/usr/local/bin/firebase appdistribution:distribute #{apk_path} --app 1:224943458926:android:2e1f34bb162a4145f2747f --testers gharbiriadh16@gmail.com,gharbiriadh17@gmail.com,Ichamly-contractor@momah.gov.sa --release-notes 'New staging build'")
+
+    # Construct Firebase App Distribution invitation link
+    firebase_app_id = "1:224943458926:android:2e1f34bb162a4145f2747f"
+    invitation_link = "https://appdistribution.firebase.google.com/pub/i/#{firebase_app_id}"
+    message = "✅ New *Staging APK* uploaded to Firebase App Distribution. Access it here: #{invitation_link}. Ensure you accept the invitation email and sign in with the invited email (gharbiriadh16@gmail.com or gharbiriadh17@gmail.com)."
+
+    # Notify Teams with invitation link
+    notify_teams(message)
+  end
+end
+
+desc "Run both iOS and Android beta builds"
+lane :beta_all do
+  beta(platform: :ios)
+  beta(platform: :android)
+end
+
+# Helper to notify Microsoft Teams
+def notify_teams(message)
+  require 'net/http'
+  require 'json'
+
+  uri = URI.parse("https://intaliocom.webhook.office.com/webhookb2/e18cab20-32aa-4f0c-972c-30e0ec3fd59a@8fd45bf7-d0fe-4746-9a74-39d1123b4e2e/IncomingWebhook/3c775d916f4443ec917711cefea8c059/4a06946a-677f-4509-8c37-563af5ac69b0/V2VjgyjR-GykBZ1lw3LEZC6c9dqDnihlCVattvBXcpQeY1")
+  header = { 'Content-Type': 'application/json' }
+  payload = { text: message }
+
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  request = Net::HTTP::Post.new(uri.request_uri, header)
+  request.body = payload.to_json
+  response = http.request(request)
+  puts "Teams notification sent: #{response.code}"
+end
