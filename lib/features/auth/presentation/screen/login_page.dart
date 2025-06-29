@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:momra/core/router/router.dart';
 import 'package:momra/core/theme/colors.dart';
 import 'package:momra/core/widgets/custom_button.dart';
 import 'package:momra/features/auth/presentation/bloc/authentication_bloc.dart';
@@ -233,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
         if (state is GenerateCaptchaSuccess) {
-          context.push(AppRoutes.verifyCaptchaPage);
+          // context.push(AppRoutes.verifyCaptchaPage);
         }
       },
       builder: (context, state) {

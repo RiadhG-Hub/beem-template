@@ -7,7 +7,6 @@ import 'package:momra/core/db_config/dio_interceptor.dart';
 import 'package:momra/features/auth/data/data_source/auth_cached_data_source.dart';
 import 'package:momra/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:momra/features/auth/presentation/bloc/authentication_bloc.dart';
-import 'package:momra/features/send_instructions/presentation/bloc/collect_instruction_cubit/collect_instruction_cubit_cubit.dart';
 import 'package:momra/gen/assets.gen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -94,8 +93,6 @@ class _SplashScreenState extends State<SplashScreen>
         }
         final authenticationBloc = await getIt.getAsync<AuthenticationBloc>();
         authenticationBloc.user = userModel;
-        final collectionCubit = getIt.get<CollectInstructionCubit>();
-        collectionCubit.advisors = userModel.usersList ?? [];
 
         final token = await tokenManager.getToken();
         if (token != userModel.token) {
@@ -104,11 +101,22 @@ class _SplashScreenState extends State<SplashScreen>
         }
 
         switch (userModel.usertype) {
-          case "minister":
-            context.pushReplacement(AppRoutes.sendInstructionPage);
+          case "driver":
+            final currentContext = context;
+
+            if (currentContext.mounted) {
+              //a
+              currentContext.pushReplacement(AppRoutes.loginPage);
+            }
+
             break;
-          case "advisor":
-            context.pushReplacement(AppRoutes.receiveInstructionPage);
+          case "passenger":
+            final currentContext = context;
+
+            if (currentContext.mounted) {
+              currentContext.pushReplacement(AppRoutes.loginPage);
+            }
+
             break;
           default:
             _showUnknownUserTypeDialog();
@@ -275,7 +283,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                   _startSplashLogic();
                 },
-                child: const Text("إعادة المحاولة"),
+                child: const Text("retry"),
               ),
           ],
         ),

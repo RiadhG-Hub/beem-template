@@ -7,16 +7,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:momra/core/theme/theme.dart';
 import 'package:momra/features/auth/presentation/bloc/authentication_bloc.dart';
-import 'package:momra/features/receive_instructions/presentation/bloc/cubit/notification_cubit.dart';
-import 'package:momra/features/receive_instructions/presentation/bloc/receive_instruction_bloc.dart';
-import 'package:momra/features/settings/presentation/controller/settings_cubit.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'core/router/router.dart';
 import 'core/theme/colors.dart';
 import 'features/auth/presentation/cubit/user_credentials/user_credentials_cubit.dart';
-import 'features/send_instructions/presentation/bloc/collect_instruction_cubit/collect_instruction_cubit_cubit.dart';
-import 'features/send_instructions/presentation/bloc/send_instruction_bloc/send_instruction_bloc.dart';
 import 'injectables.dart';
 
 void main() async {
@@ -55,12 +50,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => getIt<AuthenticationBloc>()),
-        BlocProvider(create: (_) => getIt<SendInstructionBloc>()),
-        BlocProvider(create: (_) => getIt<ReceiveInstructionBloc>()),
-        BlocProvider(create: (_) => getIt<CollectInstructionCubit>()),
-        BlocProvider(create: (_) => NotificationCubit()),
         BlocProvider(create: (_) => getIt<UserCredentialsCubit>()),
-        BlocProvider(create: (_) => getIt<SettingsCubit>()..fetchBaseUrl()),
       ],
       child: Builder(
         builder: (context) {
