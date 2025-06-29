@@ -47,7 +47,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
     Color backGroundColor = Colors.black,
     Duration duration = const Duration(seconds: 2),
     required String message}) {
-  var snackBar = SnackBar(
+  final snackBar = SnackBar(
     content: Text(message),
     backgroundColor: backGroundColor,
     duration: duration,

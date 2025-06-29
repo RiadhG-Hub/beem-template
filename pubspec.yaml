@@ -1,4 +1,4 @@
-name: momra
+name: beem
 description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -138,6 +138,11 @@ dev_dependencies:
   change_app_package_name: ^1.4.0
   pub_version_plus: ^3.1.2
   dart_mappable_builder: ^4.5.0
+  beemwidget:
+      git:
+        url: https://github.com/RiadhG-Hub/beemwidget.git
+        ref: dev
+
 
 flutter_launcher_icons:
   android: true
@@ -167,7 +172,6 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
-    - assets/whisper/
     - .env
 
   fonts:

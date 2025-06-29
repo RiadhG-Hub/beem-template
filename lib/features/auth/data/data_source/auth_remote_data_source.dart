@@ -1,5 +1,5 @@
+import 'package:beem/core/db_config/dio_interceptor.dart';
 import 'package:injectable/injectable.dart';
-import 'package:momra/core/db_config/dio_interceptor.dart';
 
 @injectable
 @singleton

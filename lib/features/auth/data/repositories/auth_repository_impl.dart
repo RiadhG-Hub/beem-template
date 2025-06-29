@@ -1,8 +1,8 @@
-import 'package:injectable/injectable.dart';
-import 'package:momra/features/auth/data/data_source/auth_cached_data_source.dart';
-import 'package:momra/features/auth/data/data_source/auth_remote_data_source.dart'
+import 'package:beem/features/auth/data/data_source/auth_cached_data_source.dart';
+import 'package:beem/features/auth/data/data_source/auth_remote_data_source.dart'
     show AuthDataSource;
-import 'package:momra/features/auth/domain/repositories/auth_repository.dart';
+import 'package:beem/features/auth/domain/repositories/auth_repository.dart';
+import 'package:injectable/injectable.dart';
 
 @injectable
 @singleton

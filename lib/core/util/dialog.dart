@@ -5,22 +5,22 @@ Future<bool> showCloseConfirmationDialog(BuildContext context) async {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text('Close the app?'),
-        content: Text('Are you sure you want to close the app?'),
+        title: const Text('Close the app?'),
+        content: const Text('Are you sure you want to close the app?'),
         actionsAlignment: MainAxisAlignment.spaceBetween,
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(false); // Cancel the back navigation
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context)
                   .pop(true); // Allow the back navigation and close the app
             },
-            child: Text('Close'),
+            child: const Text('Close'),
           ),
         ],
       );

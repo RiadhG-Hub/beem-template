@@ -1,10 +1,11 @@
+import 'package:beem/features/auth/presentation/screen/sign_up.dart';
+import 'package:beem/splash_screen_view.dart' show SplashScreen;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:momra/splash_screen_view.dart' show SplashScreen;
 
 class AppRoutes {
   static const String splashScreen = '/';
-  static const String loginPage = '/loginPage';
+  static const String signup = '/signUp';
 }
 
 final GoRouter router = GoRouter(
@@ -15,6 +16,14 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) => _buildPageWithTransition(
         state: state,
         child: const SplashScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.signup,
+      name: AppRoutes.signup,
+      pageBuilder: (context, state) => _buildPageWithTransition(
+        state: state,
+        child: const SignUp(),
       ),
     ),
   ],

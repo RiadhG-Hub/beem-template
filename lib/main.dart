@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,32 +40,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [],
-      child: Builder(
-        builder: (context) {
-          return ScreenUtilInit(
-            useInheritedMediaQuery: true,
-            minTextAdapt: true,
-            designSize: _getDesignSize(context),
-            builder: (contextMain, child) {
-              return GestureDetector(
-                onTap: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                },
-                child: MaterialApp.router(
-                  locale: AppLocalizations.supportedLocales.first,
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  localizationsDelegates:
-                      AppLocalizations.localizationsDelegates,
-                  debugShowCheckedModeBanner: true,
-                  routerConfig: router,
-                ),
-              );
-            },
-          );
-        },
-      ),
+    return ScreenUtilInit(
+      useInheritedMediaQuery: true,
+      minTextAdapt: true,
+      designSize: _getDesignSize(context),
+      builder: (contextMain, child) {
+        return GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: MaterialApp.router(
+            locale: AppLocalizations.supportedLocales.first,
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            debugShowCheckedModeBanner: true,
+            routerConfig: router,
+          ),
+        );
+      },
     );
   }
 
