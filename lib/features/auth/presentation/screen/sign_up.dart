@@ -4,6 +4,11 @@ import 'package:beemwidget/text_styles/beem_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../gen/assets.gen.dart';
+
+/// SignUp screen responsible for collecting user's phone number
+/// and animating the UI on mount. This screen uses custom-styled
+/// BeemWidgets and includes slide & fade-in animation.
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
@@ -12,13 +17,23 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
+  /// Controller for phone number input field
   final TextEditingController phoneNumberController = TextEditingController();
-  bool _isLoading = false;
+
+  /// Focus node to programmatically focus on the input field
   final FocusNode phoneFocusNode = FocusNode();
 
-  late AnimationController _controller;
-  late Animation<Offset> _slideAnimation;
-  late Animation<double> _fadeAnimation;
+  /// Animation controller for fade and slide transitions
+  late final AnimationController _controller;
+
+  /// Slide animation to move content vertically on mount
+  late final Animation<Offset> _slideAnimation;
+
+  /// Fade animation to fade content in on mount
+  late final Animation<double> _fadeAnimation;
+
+  /// Indicates if the next button is loading
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -40,7 +55,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
 
     _controller.forward().whenComplete(() {
-      // Focus the text field after animation completes
+      // Automatically focus on the phone input field after animation
       FocusScope.of(context).requestFocus(phoneFocusNode);
     });
   }
@@ -53,6 +68,20 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  /// Triggers loading and validates phone number input length
+  void _handleNext() {
+    if (phoneNumberController.text.trim().length == 8) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      // TODO: Trigger OTP request or navigate to next screen
+    }
+  }
+
+  /// Determines if the next button should be enabled
+  bool get _isPhoneValid => phoneNumberController.text.trim().length == 8;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,20 +90,21 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
         child: SlideTransition(
           position: _slideAnimation,
           child: Padding(
-            padding: EdgeInsets.only(top: 50.sp, right: 32.sp, left: 32.sp),
+            padding:
+                EdgeInsets.symmetric(horizontal: 32.sp).copyWith(top: 50.sp),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 20.sp),
-                    child: Image.asset(
-                      "assets/icon_logo.png",
-                      height: 53.sp,
-                      width: 37.sp,
-                    ),
+                /// Logo
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20.sp),
+                  child: Assets.images.iconLogo.image(
+                    height: 53.sp,
+                    width: 37.sp,
                   ),
                 ),
+
+                /// Instruction Text
                 Padding(
                   padding: EdgeInsets.only(bottom: 18.sp),
                   child: Text(
@@ -82,14 +112,15 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                     style: BeemTextStyles.poppinsMedium15,
                   ),
                 ),
+
+                /// Phone Number Input Field
                 Padding(
                   padding: EdgeInsets.only(bottom: 18.sp),
                   child: BeemOutlinedTextField(
+                    controller: phoneNumberController,
                     keyboardType: TextInputType.phone,
                     focusNode: phoneFocusNode,
-                    onChanged: (value) {
-                      setState(() {});
-                    },
+                    onChanged: (_) => setState(() {}),
                     style: BeemTextFieldStyle(
                       hintText: 'Mobile number',
                       prefix: Padding(
@@ -97,7 +128,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Image.asset("assets/img.png"),
+                            Assets.images.img.image(),
                             const Icon(Icons.keyboard_arrow_down),
                             Text('+216', style: BeemTextStyles.poppinsMedium14),
                           ],
@@ -105,7 +136,6 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                       ),
                       isRequired: true,
                     ),
-                    controller: phoneNumberController,
                   ),
                 ),
               ],
@@ -113,33 +143,33 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
+
+      /// Terms and Next Button Section
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
         padding: EdgeInsets.symmetric(horizontal: 32.sp),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            /// Terms & Privacy Notice
             Padding(
               padding: EdgeInsets.only(bottom: 32.sp),
               child: Text(
                 "By continuing you acknowledge having read and accepted the Terms & Conditions and Privacy policy",
                 style: BeemTextStyles.poppinsMedium13,
+                textAlign: TextAlign.center,
               ),
             ),
+
+            /// Next Button
             Padding(
               padding: EdgeInsets.only(bottom: 22.sp),
               child: BeemButtonsStyles.defaultButton(
                 label: 'Next',
                 backgroundColor: const Color(0xff7A3BFF),
-                onPressed: () {
-                  if (phoneNumberController.text.length == 8) {
-                    setState(() {
-                      _isLoading = true;
-                    });
-                  }
-                },
+                onPressed: _handleNext,
                 isLoading: _isLoading,
-                isDisabled: phoneNumberController.text.length != 8,
+                isDisabled: !_isPhoneValid,
               ),
             ),
           ],

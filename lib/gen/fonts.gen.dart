@@ -10,6 +10,6 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: Segoe_Ui
-  static const String segoeUi = 'Segoe_Ui';
+  /// Font family: Poppins
+  static const String poppins = 'Poppins';
 }

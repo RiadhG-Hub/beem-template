@@ -122,7 +122,7 @@ dev_dependencies:
   flutter_flavorizr: any
   flutter_gen_runner: ^5.3.2
   # Code generation
-  build_runner: ^2.3.3
+  build_runner:
   freezed: ^3.0.6
   injectable_generator: any
   envied_generator: ^1.1.1
@@ -152,9 +152,9 @@ flutter_launcher_icons:
 
 names_launcher:
   name:
-    default: "وزارة البلديات والإسكان"
-    ar: "وزارة البلديات والإسكان"
-    en: "Ministry of Municipalities and Housing"
+    default: "Beem Client"
+    ar: "حريف Beem"
+    en: "Beem Client"
   platforms:
     android:
       enable: true
@@ -162,6 +162,8 @@ names_launcher:
       enable: true
 
 flutter_gen:
+  output: lib/gen/
+  line_length: 80
   integrations:
     flutter_svg: true
 
@@ -175,13 +177,53 @@ flutter:
     - .env
 
   fonts:
-    - family: Segoe_Ui
+    - family: Poppins
       fonts:
-        - asset: assets/font/segoe-ui.ttf
-        - asset: assets/font/segoe-ui-bold.ttf
-          weight: 700
-        - asset: assets/font/segoe-ui-semibold.ttf
-          weight: 600
+          - asset: assets/fonts/Poppins/Poppins-Thin.ttf
+            weight: 100
+          - asset: assets/fonts/Poppins/Poppins-ThinItalic.ttf
+            weight: 100
+            style: italic
+          - asset: assets/fonts/Poppins/Poppins-ExtraLight.ttf
+            weight: 200
+          - asset: assets/fonts/Poppins/Poppins-ExtraLightItalic.ttf
+            weight: 200
+            style: italic
+          - asset: assets/fonts/Poppins/Poppins-Light.ttf
+            weight: 300
+          - asset: assets/fonts/Poppins/Poppins-LightItalic.ttf
+            weight: 300
+            style: italic
+          - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+            weight: 400
+          - asset: assets/fonts/Poppins/Poppins-Italic.ttf
+            weight: 400
+            style: italic
+          - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+            weight: 500
+          - asset: assets/fonts/Poppins/Poppins-MediumItalic.ttf
+            weight: 500
+            style: italic
+          - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
+            weight: 600
+          - asset: assets/fonts/Poppins/Poppins-SemiBoldItalic.ttf
+            weight: 600
+            style: italic
+          - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+            weight: 700
+          - asset: assets/fonts/Poppins/Poppins-BoldItalic.ttf
+            weight: 700
+            style: italic
+          - asset: assets/fonts/Poppins/Poppins-ExtraBold.ttf
+            weight: 800
+          - asset: assets/fonts/Poppins/Poppins-ExtraBoldItalic.ttf
+            weight: 800
+            style: italic
+          - asset: assets/fonts/Poppins/Poppins-Black.ttf
+            weight: 900
+          - asset: assets/fonts/Poppins/Poppins-BlackItalic.ttf
+            weight: 900
+            style: italic
 sentry:
   upload_debug_symbols: true
   upload_source_maps: true

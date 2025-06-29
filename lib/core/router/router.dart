@@ -1,5 +1,4 @@
 import 'package:beem/features/auth/presentation/screen/sign_up.dart';
-import 'package:beem/splash_screen_view.dart' show SplashScreen;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,7 +14,7 @@ final GoRouter router = GoRouter(
       name: AppRoutes.splashScreen,
       pageBuilder: (context, state) => _buildPageWithTransition(
         state: state,
-        child: const SplashScreen(),
+        child: const SignUp(),
       ),
     ),
     GoRoute(
