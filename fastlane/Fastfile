@@ -30,7 +30,7 @@ platform :ios do
     end
 
     # Firebase Distribution
-    sh("/usr/local/bin/firebase appdistribution:distribute #{ipa_path} --app 1:224943458926:ios:b011d17368cec6bcf2747f --testers gharbiriadh16@gmail.com,gharbiriadh17@gmail.com,Ichamly-contractor@momah.gov.sa --release-notes 'New enterprise build'")
+    sh("/usr/local/bin/firebase appdistribution:distribute #{ipa_path} --app 1:224943458926:ios:b011d17368cec6bcf2747f --testers gharbiriadh16@gmail.com,gharbiriadh17@gmail.com --release-notes 'New enterprise build'")
 
     # Construct Firebase App Distribution invitation link
     firebase_app_id = "1:224943458926:ios:b011d17368cec6bcf2747f"
@@ -53,7 +53,7 @@ platform :android do
     end
 
     # Firebase distribution
-    sh("/usr/local/bin/firebase appdistribution:distribute #{apk_path} --app 1:224943458926:android:2e1f34bb162a4145f2747f --testers gharbiriadh16@gmail.com,gharbiriadh17@gmail.com,Ichamly-contractor@momah.gov.sa --release-notes 'New staging build'")
+    sh("/usr/local/bin/firebase appdistribution:distribute #{apk_path} --app 1:224943458926:android:2e1f34bb162a4145f2747f --testers gharbiriadh16@gmail.com,gharbiriadh17@gmail.com --release-notes 'New staging build'")
 
     # Construct Firebase App Distribution invitation link
     firebase_app_id = "1:224943458926:android:2e1f34bb162a4145f2747f"

@@ -92,53 +92,59 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
           child: Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: 32.sp).copyWith(top: 50.sp),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// Logo
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20.sp),
-                  child: Assets.images.iconLogo.image(
-                    height: 53.sp,
-                    width: 37.sp,
-                  ),
-                ),
-
-                /// Instruction Text
-                Padding(
-                  padding: EdgeInsets.only(bottom: 18.sp),
-                  child: Text(
-                    "Enter your phone number to receive a one-time verification code",
-                    style: BeemTextStyles.poppinsMedium15,
-                  ),
-                ),
-
-                /// Phone Number Input Field
-                Padding(
-                  padding: EdgeInsets.only(bottom: 18.sp),
-                  child: BeemOutlinedTextField(
-                    controller: phoneNumberController,
-                    keyboardType: TextInputType.phone,
-                    focusNode: phoneFocusNode,
-                    onChanged: (_) => setState(() {}),
-                    style: BeemTextFieldStyle(
-                      hintText: 'Mobile number',
-                      prefix: Padding(
-                        padding: EdgeInsets.only(right: 12.sp),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Assets.images.img.image(),
-                            const Icon(Icons.keyboard_arrow_down),
-                            Text('+216', style: BeemTextStyles.poppinsMedium14),
-                          ],
-                        ),
-                      ),
-                      isRequired: true,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// Logo
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20.sp),
+                    child: Assets.images.iconLogo.image(
+                      height: 53.sp,
+                      width: 37.sp,
                     ),
                   ),
-                ),
-              ],
+
+                  /// Instruction Text
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 18.sp),
+                    child: Text(
+                      "Enter your phone number to receive a one-time verification code",
+                      style: BeemTextStyles.poppinsMedium15,
+                    ),
+                  ),
+
+                  /// Phone Number Input Field
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 18.sp),
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: BeemOutlinedTextField(
+                        controller: phoneNumberController,
+                        keyboardType: TextInputType.phone,
+                        focusNode: phoneFocusNode,
+                        onChanged: (_) => setState(() {}),
+                        style: BeemTextFieldStyle(
+                          hintText: 'Mobile number',
+                          prefix: Padding(
+                            padding: EdgeInsets.only(right: 12.sp),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Assets.images.img.image(),
+                                const Icon(Icons.keyboard_arrow_down),
+                                Text('+216',
+                                    style: BeemTextStyles.poppinsMedium14),
+                              ],
+                            ),
+                          ),
+                          isRequired: true,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
