@@ -107,6 +107,7 @@ dependencies:
   #whisper_ggml: ^1.0.0
   encrypt_shared_preferences: ^0.9.9
   mocktail: ^1.0.4
+  google_maps_flutter: ^2.12.3
 
 
 dev_dependencies:
